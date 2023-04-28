@@ -53,6 +53,12 @@ class GameViewController: UIViewController {
     // Set countdown timer based on user's settings
     timeRemaining = gameSettings?.timer ?? 60;
     
+    // Set highest score achieved by any player
+    let highScores: [Score] = Score.getAllScores();
+    if (highScores.count > 0) {
+      highScoreLabel.text = String(highScores[0].points);
+    }
+    
     // Begin countdown
     timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
       self.timeRemaining -= 1;
